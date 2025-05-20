@@ -1,8 +1,9 @@
 :root {
-    --pri: #264653;
-    --sec: #2A9D8F;
-    --tri: #E9C46A;
-    --quad: #aa6b37;
+    --pri: #b0c4b1;
+    --sec: #ff477e;
+    --tri: #457B9D;
+    --quad: #BDE0FE;
+    --pent: #6a432c;
 }
 
 @font-face {
@@ -32,7 +33,7 @@ html,
 body {
     height: 100%;
     width: 100%;
-    background-color: var(--quad);
+    background-color: var(--pri);
 }
 
 nav {
@@ -55,7 +56,6 @@ section.allElems {
 }
 
 .elem {
-    background-color: var(--tri);
     border-radius: 15px;
     font-size: 22px;
     height: 400px;
@@ -78,7 +78,7 @@ section.allElems {
     position: absolute;
     bottom: 5%;
     right: 5%;
-    color: aliceblue;
+    color: var(--sec);
 }
 
 .elem:active {
@@ -88,11 +88,15 @@ section.allElems {
 .fullElem {
     height: 100%;
     width: 100%;
-    background-color: var(--quad);
+    background-color: var(--pri);
     padding: 20px;
     display: none;
     font-size: 30px;
     position: absolute;
+}
+
+.fullElem h2 {
+    color: var(--tri);
 }
 
 .esc {
@@ -129,6 +133,7 @@ section.allElems {
 
 #todopage h2 {
     font-size: 60px;
+    color: var(--tri);
 }
 
 #todopage .tasksContainer {
@@ -141,14 +146,14 @@ section.allElems {
 }
 
 #todopage .tasksContainer .addTasks {
-    background-color: rgb(201, 129, 20);
+    background-color: #6a432c;
     height: 100%;
     width: 35%;
     border-radius: 20px;
 }
 
 #todopage .tasksContainer .allTasks {
-    background-color: rgb(201, 129, 20);
+    background-color: #6a432c;
     height: 100%;
     width: 60%;
     border-radius: 20px;
@@ -165,38 +170,39 @@ section.allElems {
     padding: 10px 20px;
     width: 100%;
     font-size: 25px;
-    background-color: var(--tri);
+    background-color: #F1FAEE;
     border-radius: 5px;
     border: none;
     outline: none;
     margin-bottom: 20px;
     text-decoration: none;
+    color: #333;
 }
 
 #todopage .tasksContainer .addTasks form textarea {
     padding: 10px 20px;
+    background-color: #F1FAEE;
     width: 100%;
     font-size: 25px;
-    background-color: var(--tri);
     border-radius: 5px;
     border: none;
     outline: none;
     margin-bottom: 20px;
     resize: none;
     height: 220px;
+    color: #333;
 }
 
 .importantCheckbox {
     display: flex;
     align-items: center;
     font-size: 16px;
-    color: var(--pri);
+    color: white;
     font-weight: 600;
     cursor: pointer;
     user-select: none;
     width: 50%;
     white-space: nowrap;
-    /* background-color: red; */
 }
 
 .importantCheckbox input[type="checkbox"] {
@@ -210,7 +216,7 @@ section.allElems {
     padding: 10px 20px;
     width: 100%;
     font-size: 25px;
-    background-color: var(--quad);
+    background-color: #670D2F;
     border-radius: 5px;
     border: none;
     outline: none;
@@ -228,7 +234,6 @@ section.allElems {
 }
 
 #todopage .tasksContainer .allTasks {
-    background-color: rgb(201, 129, 20);
     height: 100%;
     width: 60%;
     border-radius: 20px;
@@ -304,6 +309,7 @@ section.allElems {
     align-items: flex-start;
     justify-content: space-between;
     overflow: auto;
+    color: var(--tri);
 }
 
 .day-planner::-webkit-scrollbar {
@@ -324,7 +330,7 @@ section.allElems {
     left: 0.8%;
     font-size: 20px;
     font-family: bold;
-    color: var(--quad);
+    color: var(--tri);
 }
 
 .day-planner-time input {
@@ -337,5 +343,107 @@ section.allElems {
     font-size: 25px;
     padding-top: 35px;
     text-decoration: none;
-    color: var(--pri)
+    color: #333;
 }
+
+.motivation-fullPage-container {
+    height: 100%;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.motivational-fullpage .motivation-container {
+    height: 540px;
+    width: 80%;
+    border-radius: 50px;
+    position: relative;
+}
+
+.motivational-fullpage .motivation-container::after {
+    content: '';
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-color: #333;
+    border-radius: 50px;
+    scale: 1.15;
+    -webkit-filter: blur(100px);
+    filter: blur(100px);
+    z-index: 8;
+}
+
+.motivational-fullpage .motivation-container .motivation-wrapper {
+    z-index: 10;
+    position: absolute;
+    width: 80%;
+    background-color: var(--tri);
+    top: 10%;
+    left: 20%;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.motivation-1 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: fit-content;
+    background-color: #7C4585;
+    padding: 20px;
+    border-radius: 30px;
+}
+
+.motivation-1 h2 {
+    color: whitesmoke;
+    text-align: center;
+}
+
+.motivation-2 {
+    margin-top: 40px;
+}
+
+.motivation-3 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 20px;
+    border-radius: 30px;
+}
+
+.motivation-3 h2 {
+    color: whitesmoke;
+}
+
+.motivational-fullpage .motivation-container .motivation-wrapper img {
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    opacity: 0.8;
+    height: 80px;
+}
+
+/* .pomodoro-fullpage {
+    display: block;
+    position: relative;
+}
+
+.pomodoro-fullpage .focus-timer {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: var(--pent);
+}
+
+focus-timer h1 {
+    font-size: 200px;
+    color: var(--pent);
+} */
