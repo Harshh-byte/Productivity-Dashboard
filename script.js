@@ -212,64 +212,65 @@ const escButton = document.getElementById('escButton');
 
 function openAchievements() {
     achievementsPanel.style.display = 'block';
+    var escBtn = document.querySelector('.esc')
+    escBtn.addEventListener('click', () => {
+        achievementsPanel.style.display = 'none';
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const addGoalBtn = document.getElementById("add-goal-btn");
+        const goalInput = document.getElementById("goal-input");
+        const goalList = document.getElementById("goal-list");
+
+        addGoalBtn.addEventListener("click", () => {
+            const goalText = goalInput.value.trim();
+
+            if (goalText !== "") {
+                const goalItem = document.createElement("li");
+                goalItem.className = "goal-item";
+
+                const goalContent = document.createElement("span");
+                goalContent.textContent = goalText;
+
+                const goalActions = document.createElement("div");
+                goalActions.className = "goal-actions";
+
+                const completeBtn = document.createElement("button");
+                completeBtn.innerHTML = "✅";
+                completeBtn.title = "Mark as Complete";
+
+                const deleteBtn = document.createElement("button");
+                deleteBtn.innerHTML = "🗑️";
+                deleteBtn.title = "Delete Goal";
+
+                completeBtn.addEventListener("click", () => {
+                    goalItem.classList.toggle("completed");
+                });
+
+                deleteBtn.addEventListener("click", () => {
+                    goalList.removeChild(goalItem);
+                });
+
+                goalActions.appendChild(completeBtn);
+                goalActions.appendChild(deleteBtn);
+
+                goalItem.appendChild(goalContent);
+                goalItem.appendChild(goalActions);
+
+                goalList.appendChild(goalItem);
+                goalInput.value = "";
+            }
+        });
+
+        goalInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                addGoalBtn.click();
+            }
+        });
+    });
+
 }
-var escBtn = document.querySelector('.esc')
-escBtn.addEventListener('click', () => {
-    achievementsPanel.style.display = 'none';
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-    const addGoalBtn = document.getElementById("add-goal-btn");
-    const goalInput = document.getElementById("goal-input");
-    const goalList = document.getElementById("goal-list");
-
-    addGoalBtn.addEventListener("click", () => {
-        const goalText = goalInput.value.trim();
-
-        if (goalText !== "") {
-            const goalItem = document.createElement("li");
-            goalItem.className = "goal-item";
-
-            const goalContent = document.createElement("span");
-            goalContent.textContent = goalText;
-
-            const goalActions = document.createElement("div");
-            goalActions.className = "goal-actions";
-
-            const completeBtn = document.createElement("button");
-            completeBtn.innerHTML = "✅";
-            completeBtn.title = "Mark as Complete";
-
-            const deleteBtn = document.createElement("button");
-            deleteBtn.innerHTML = "🗑️";
-            deleteBtn.title = "Delete Goal";
-
-            completeBtn.addEventListener("click", () => {
-                goalItem.classList.toggle("completed");
-            });
-
-            deleteBtn.addEventListener("click", () => {
-                goalList.removeChild(goalItem);
-            });
-
-            goalActions.appendChild(completeBtn);
-            goalActions.appendChild(deleteBtn);
-
-            goalItem.appendChild(goalContent);
-            goalItem.appendChild(goalActions);
-
-            goalList.appendChild(goalItem);
-            goalInput.value = "";
-        }
-    });
-
-    goalInput.addEventListener("keypress", (e) => {
-        if (e.key === "Enter") {
-            addGoalBtn.click();
-        }
-    });
-});
-
+openAchievements()
 
 async function weatherAPICall() {
     let response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=23.25&longitude=77.50&hourly=temperature_2m')
