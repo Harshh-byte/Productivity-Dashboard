@@ -94,7 +94,6 @@ function dailyPlanner() {
     var dayPlanner = document.querySelector('.day-planner')
 
     var hours = Array.from({ length: 18 }, (elem, idx) => `${6 + idx}:00 - ${7 + idx}:00`)
-    console.log(hours);
 
     var wholeDaySum = ''
     hours.forEach(function (elem, idx) {
@@ -132,3 +131,150 @@ function motivationalQuote() {
     fetchQuote()
 }
 motivationalQuote()
+
+function pomodoroTimer() {
+    let timerInterval = null;
+    let totalSeconds = 25 * 60;
+    let timer = document.querySelector('.focus-timer h2');
+    let startBtn = document.querySelector('.focus-timer .start');
+    let pauseBtn = document.querySelector('.focus-timer .pause');
+    let resetBtn = document.querySelector('.focus-timer .reset');
+    let session = document.querySelector('.pomodoro-fullpage .session');
+    let isWorkSession = true;
+
+    function updateTimer() {
+        let minutes = Math.floor(totalSeconds / 60);
+        let seconds = totalSeconds % 60;
+
+        timer.innerHTML = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+    }
+
+    function startTimer() {
+        clearInterval(timerInterval)
+
+        if (isWorkSession) {
+
+
+            timerInterval = setInterval(function () {
+                if (totalSeconds > 0) {
+                    totalSeconds--
+                    updateTimer()
+                } else {
+                    isWorkSession = false
+                    clearInterval(timerInterval)
+                    timer.innerHTML = '05:00'
+                    session.innerHTML = 'Take a Break'
+                    session.style.backgroundColor = 'var(--tri)'
+                    totalSeconds = 5 * 60
+                }
+            }, 1000)
+        } else {
+            timerInterval = setInterval(function () {
+                if (totalSeconds > 0) {
+                    totalSeconds--
+                    updateTimer()
+                } else {
+                    isWorkSession = true
+                    clearInterval(timerInterval)
+                    timer.innerHTML = '25:00'
+                    session.innerHTML = 'Work Session'
+                    session.style.backgroundColor = 'var(--green)'
+                    totalSeconds = 25 * 60
+                }
+            }, 1000)
+        }
+    }
+
+    function pauseTimer() {
+        clearInterval(timerInterval)
+    }
+
+    function resetTimer() {
+        clearInterval(timerInterval)
+        totalSeconds = 25 * 60
+        updateTimer()
+        timer.innerHTML = '25:00'
+        session.innerHTML = 'Work Session'
+        session.style.backgroundColor = 'var(--green)'
+        startBtn.addEventListener('click', startTimer)
+        pauseBtn.addEventListener('click', pauseTimer)
+        resetBtn.addEventListener('click', resetTimer)
+    }
+
+    startBtn.addEventListener('click', startTimer)
+    pauseBtn.addEventListener('click', pauseTimer)
+    resetBtn.addEventListener('click', resetTimer)
+}
+pomodoroTimer()
+
+const achievementsPanel = document.getElementById('achievementsPanel');
+const escButton = document.getElementById('escButton');
+
+function openAchievements() {
+    achievementsPanel.style.display = 'block';
+}
+var escBtn = document.querySelector('.esc')
+escBtn.addEventListener('click', () => {
+    achievementsPanel.style.display = 'none';
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const addGoalBtn = document.getElementById("add-goal-btn");
+    const goalInput = document.getElementById("goal-input");
+    const goalList = document.getElementById("goal-list");
+
+    addGoalBtn.addEventListener("click", () => {
+        const goalText = goalInput.value.trim();
+
+        if (goalText !== "") {
+            const goalItem = document.createElement("li");
+            goalItem.className = "goal-item";
+
+            const goalContent = document.createElement("span");
+            goalContent.textContent = goalText;
+
+            const goalActions = document.createElement("div");
+            goalActions.className = "goal-actions";
+
+            const completeBtn = document.createElement("button");
+            completeBtn.innerHTML = "✅";
+            completeBtn.title = "Mark as Complete";
+
+            const deleteBtn = document.createElement("button");
+            deleteBtn.innerHTML = "🗑️";
+            deleteBtn.title = "Delete Goal";
+
+            completeBtn.addEventListener("click", () => {
+                goalItem.classList.toggle("completed");
+            });
+
+            deleteBtn.addEventListener("click", () => {
+                goalList.removeChild(goalItem);
+            });
+
+            goalActions.appendChild(completeBtn);
+            goalActions.appendChild(deleteBtn);
+
+            goalItem.appendChild(goalContent);
+            goalItem.appendChild(goalActions);
+
+            goalList.appendChild(goalItem);
+            goalInput.value = "";
+        }
+    });
+
+    goalInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+            addGoalBtn.click();
+        }
+    });
+});
+
+
+async function weatherAPICall() {
+    let response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=23.25&longitude=77.50&hourly=temperature_2m')
+    let data = await response.json();
+    console.log(data);
+
+}
+weatherAPICall()
