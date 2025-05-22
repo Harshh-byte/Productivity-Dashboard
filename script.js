@@ -207,10 +207,8 @@ function pomodoroTimer() {
 }
 pomodoroTimer()
 
-const achievementsPanel = document.getElementById('achievementsPanel');
-const escButton = document.getElementById('escButton');
-
 function openAchievements() {
+    const achievementsPanel = document.getElementById('achievementsPanel');
     achievementsPanel.style.display = 'block';
     var escBtn = document.querySelector('.esc')
     escBtn.addEventListener('click', () => {
@@ -276,6 +274,5 @@ async function weatherAPICall() {
     let response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=23.25&longitude=77.50&hourly=temperature_2m')
     let data = await response.json();
     console.log(data);
-
 }
 weatherAPICall()
