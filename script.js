@@ -49,6 +49,14 @@ function todolist() {
             </div>`
         })
         allTask.innerHTML = sum;
+
+        // Add this block to toggle .has-tasks class
+        if (allTask.querySelector('.tasks')) {
+            allTask.classList.add('has-tasks');
+        } else {
+            allTask.classList.remove('has-tasks');
+        }
+
         const allDetails = document.querySelectorAll('.tasks details')
         allDetails.forEach(function (detail) {
             detail.addEventListener('toggle', function () {
@@ -93,15 +101,19 @@ function dailyPlanner() {
 
     var dayPlanner = document.querySelector('.day-planner')
 
-    var hours = Array.from({ length: 18 }, (elem, idx) => `${6 + idx}:00 - ${7 + idx}:00`)
+    var hours = Array.from({ length: 17 }, (elem, idx) => {
+        const start = 6 + idx;
+        const end = start + 1;
+        return `${start}:00 - ${end}:00`;
+    })
 
     var wholeDaySum = ''
     hours.forEach(function (elem, idx) {
         var savedData = dayPlanData[idx] || ''
         wholeDaySum += `<div class="day-planner-time">
-                        <p>${elem}</p>
-                        <input id=${idx} type="text" value="${savedData}" placeholder="Enter Task...">
-                    </div>`
+                            <p>${elem}</p>
+                            <input id=${idx} type="text" value="${savedData}" placeholder="Enter Task...">
+                        </div>`
     })
 
     dayPlanner.innerHTML = wholeDaySum
@@ -122,15 +134,22 @@ function motivationalQuote() {
     var motivationAuthor = document.querySelector('.motivation-3 h2')
 
     async function fetchQuote() {
-        let response = await fetch('https://api.quotable.io/random')
-        let data = await response.json()
+        try {
+            let response = await fetch('https://api.quotable.io/random');
+            if (!response.ok) throw new Error('Network response was not ok');
+            let data = await response.json();
 
-        motivationQuote.innerHTML = data.content;
-        motivationAuthor.innerHTML = '~' + " " + data.author;
+            motivationQuote.innerHTML = data.content;
+            motivationAuthor.innerHTML = '~ ' + data.author;
+        } catch (error) {
+            motivationQuote.innerHTML = "Could not fetch quote.";
+            motivationAuthor.innerHTML = "";
+            console.error("Quote API error:", error);
+        }
     }
-    fetchQuote()
+    fetchQuote();
 }
-motivationalQuote()
+motivationalQuote();
 
 function pomodoroTimer() {
     let timerInterval = null;
@@ -209,7 +228,6 @@ pomodoroTimer()
 
 function openAchievements() {
     const achievementsPanel = document.getElementById('achievementsPanel');
-    achievementsPanel.style.display = 'block';
     var escBtn = document.querySelector('.esc')
     escBtn.addEventListener('click', () => {
         achievementsPanel.style.display = 'none';
@@ -269,10 +287,3 @@ function openAchievements() {
 
 }
 openAchievements()
-
-async function weatherAPICall() {
-    let response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=23.25&longitude=77.50&hourly=temperature_2m')
-    let data = await response.json();
-    console.log(data);
-}
-weatherAPICall()

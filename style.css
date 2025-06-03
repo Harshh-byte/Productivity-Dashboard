@@ -7,26 +7,11 @@
     --green: rgb(0, 128, 79);
 }
 
-@font-face {
-    font-family: light;
-    src: url(./Assets/Fonts/Inter-Light.otf);
-}
-
-@font-face {
-    font-family: normal;
-    src: url(./Assets/Fonts/Inter-Regular.otf);
-}
-
-@font-face {
-    font-family: bold;
-    src: url(./Assets/Fonts/Inter-Bold.otf);
-}
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: normal;
+    font-family: 'Inter', sans-serif;
     color: var(--pri);
 }
 
@@ -53,14 +38,6 @@ section.allElems {
     overflow: auto;
 }
 
-/* .allElems header{
-    height: 300px;
-    width: 100%;
-    background-color: red;
-    margin-bottom: 20px;
-    border-radius: 10px;
-} */
-
 .allElems .allFeatures {
     display: flex;
     flex-wrap: wrap;
@@ -74,7 +51,6 @@ section.allElems {
     height: 400px;
     width: 220px;
     overflow: hidden;
-    font-weight: bold;
     position: relative;
     transition: all ease 0.3s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -124,7 +100,6 @@ section.allElems {
         inset 2px 2px 4px #1e1e1e;
     color: #fdf0d5;
     font-weight: 500;
-    font-family: bold;
     font-size: 20px;
     padding: 5px 15px;
     user-select: none;
@@ -208,18 +183,21 @@ section.allElems {
 
 .importantCheckbox {
     display: flex;
-    align-items: center;
+    flex-direction: row;
+    align-items: baseline;
     font-size: 16px;
     color: white;
     font-weight: 600;
     cursor: pointer;
     user-select: none;
-    width: 50%;
+    width: auto;
     white-space: nowrap;
+    gap: 18px;
+    line-height: normal;
 }
 
 .importantCheckbox input[type="checkbox"] {
-    transform: scale(1.3);
+    transform: scale(1.2);
     accent-color: red;
     cursor: pointer;
     margin: 0;
@@ -342,7 +320,6 @@ section.allElems {
     top: 10%;
     left: 0.8%;
     font-size: 20px;
-    font-family: bold;
     color: var(--tri);
 }
 
@@ -573,4 +550,17 @@ section.allElems {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     z-index: 1000;
     display: none;
+}
+
+#plannerpage.fullElem {
+    height: 100vh;
+    min-height: 100vh;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.day-planner {
+    flex: 1 1 auto;
+    min-height: 0;
 }
