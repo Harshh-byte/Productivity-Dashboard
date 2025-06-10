@@ -135,11 +135,11 @@ function motivationalQuote() {
 
     async function fetchQuote() {
         try {
-            let response = await fetch('https://api.quotable.io/random');
+            let response = await fetch('https://dummyjson.com/quotes/random');
             if (!response.ok) throw new Error('Network response was not ok');
             let data = await response.json();
 
-            motivationQuote.innerHTML = data.content;
+            motivationQuote.innerHTML = data.quote;
             motivationAuthor.innerHTML = '~ ' + data.author;
         } catch (error) {
             motivationQuote.innerHTML = "Could not fetch quote.";
