@@ -55,6 +55,7 @@ section.allElems {
     transition: all ease 0.3s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     user-select: none;
+    cursor: pointer;
 }
 
 .elem img {
@@ -68,6 +69,12 @@ section.allElems {
     bottom: 5%;
     right: 5%;
     color: var(--sec);
+    text-shadow: 1px 1px 4px #000000;
+}
+
+.elem:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 .elem:active {
