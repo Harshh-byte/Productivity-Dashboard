@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Productivity Dashboard</title>
+
+    <meta
+      name="description"
+      content="A professional all-in-one productivity dashboard for task management, goal tracking, focus sessions, and real-time weather updates."
+    />
+    <meta name="keywords" content="productivity, dashboard, task manager, pomodoro timer, goal tracker, workflow, weather, planner" />
+    <meta name="author" content="Productivity Dashboard Team" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#6366f1" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Productivity Dashboard" />
+    <meta
+      property="og:description"
+      content="Master your daily workflow with our all-in-one professional productivity suite. Focus, track, and achieve your goals with ease."
+    />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="./assets/preview.png" />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="" />
+    <meta property="twitter:title" content="Productivity Dashboard" />
+    <meta
+      property="twitter:description"
+      content="Stay focused and stay productive. Your daily personal workspace for managing tasks, goals, and focus sessions."
+    />
+    <meta property="twitter:image" content="./assets/preview.png" />
+    
+    <link rel="canonical" href="" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="favicon.png" />
+  </head>
+  <body class="theme-white">
+    <div class="app-container">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo">
+            <i class="ri-zen-fill"></i>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <div class="nav-group">
+            <p class="nav-label">Main</p>
+            <a href="#" class="nav-link active" data-page="dashboard">
+              <i class="ri-dashboard-3-line"></i>
+              <span>Dashboard</span>
+            </a>
+          </div>
+
+          <div class="nav-group">
+            <p class="nav-label">Productivity</p>
+            <a href="#" class="nav-link" data-page="tasks">
+              <i class="ri-checkbox-circle-line"></i>
+              <span>Tasks</span>
+            </a>
+            <a href="#" class="nav-link" data-page="planner">
+              <i class="ri-calendar-todo-line"></i>
+              <span>Planner</span>
+            </a>
+            <a href="#" class="nav-link" data-page="focus">
+              <i class="ri-focus-3-line"></i>
+              <span>Focus Timer</span>
+            </a>
+            <a href="#" class="nav-link" data-page="goals">
+              <i class="ri-trophy-line"></i>
+              <span>Goals</span>
+            </a>
+          </div>
+
+          <div class="nav-group">
+            <p class="nav-label">Utility</p>
+            <a href="#" class="nav-link" data-page="weather">
+              <i class="ri-sun-cloudy-line"></i>
+              <span>Weather</span>
+            </a>
+            <a href="#" class="nav-link" data-page="inspiration">
+              <i class="ri-lightbulb-line"></i>
+              <span>Inspiration</span>
+            </a>
+          </div>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="theme-switcher">
+            <p>Accent Color</p>
+            <div class="color-options">
+              <button
+                class="color-btn active"
+                data-color="#6366f1"
+                style="background: #6366f1"
+              ></button>
+              <button
+                class="color-btn"
+                data-color="#10b981"
+                style="background: #10b981"
+              ></button>
+              <button
+                class="color-btn"
+                data-color="#f43f5e"
+                style="background: #f43f5e"
+              ></button>
+              <button
+                class="color-btn"
+                data-color="#f59e0b"
+                style="background: #f59e0b"
+              ></button>
+              <button
+                class="color-btn"
+                data-color="#8b5cf6"
+                style="background: #8b5cf6"
+              ></button>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="top-bar">
+          <h1 id="page-title">Dashboard</h1>
+          <div class="top-bar-actions">
+            <div class="date-display" id="current-date">-- ---, ----</div>
+            <button id="theme-toggle" class="icon-btn">
+              <i class="ri-moon-line"></i>
+            </button>
+          </div>
+        </header>
+
+        <div class="content-viewport">
+          <section id="dashboard-page" class="page active">
+            <div class="welcome-section">
+              <h2 id="greeting">
+                Good morning,
+                <span id="user-name" contenteditable="true" spellcheck="false"
+                  >Explorer</span
+                >
+              </h2>
+              <p>Here's what's happening today.</p>
+            </div>
+
+            <div class="dashboard-grid">
+              <div class="widget weather-widget">
+                <div class="widget-header">
+                  <h3>Weather</h3>
+                  <i class="ri-map-pin-line"></i>
+                </div>
+                <div class="widget-body">
+                  <div class="weather-summary">
+                    <span id="mini-weather-icon" class="weather-icon">--</span>
+                    <div class="temp-group">
+                      <h2 id="mini-weather-temp">--°C</h2>
+                      <p id="mini-weather-desc">Loading...</p>
+                    </div>
+                  </div>
+                  <div class="weather-loc" id="mini-weather-loc">Tokyo, JP</div>
+                </div>
+              </div>
+
+              <div class="widget focus-widget">
+                <div class="widget-header">
+                  <h3>Focus Timer</h3>
+                  <i class="ri-timer-line"></i>
+                </div>
+                <div class="widget-body">
+                  <div class="timer-mini">
+                    <h2 id="mini-timer">25:00</h2>
+                    <p id="mini-timer-label">Work Session</p>
+                  </div>
+                  <button class="btn-primary mini-start" id="mini-timer-btn">
+                    Start
+                  </button>
+                </div>
+              </div>
+
+              <div class="widget tasks-widget">
+                <div class="widget-header">
+                  <h3>Today's Priority</h3>
+                  <i class="ri-list-check"></i>
+                </div>
+                <div class="widget-body">
+                  <div id="mini-task-container">
+                    <p class="empty-msg">No tasks for today.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="widget quote-widget">
+                <div class="widget-header">
+                  <h3>Daily Inspiration</h3>
+                  <i class="ri-double-quotes-l"></i>
+                </div>
+                <div class="widget-body">
+                  <p id="mini-quote">
+                    "The only way to do great work is to love what you do."
+                  </p>
+                  <span id="mini-quote-author">- Steve Jobs</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="tasks-page" class="page">
+            <div class="page-header">
+              <h2>Action Plans</h2>
+            </div>
+
+            <div class="tasks-layout">
+              <div class="task-form-panel">
+                <form id="todoForm">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      id="taskInput"
+                      placeholder="Task title..."
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <textarea
+                      id="taskDesc"
+                      placeholder="Description (optional)"
+                    ></textarea>
+                  </div>
+                  <div class="form-group row">
+                    <label class="checkbox-container">
+                      <input type="checkbox" id="importantCheckbox" />
+                      <span class="checkmark"></span>
+                      Mark as Important
+                    </label>
+                  </div>
+                  <button type="submit" class="btn-primary block">
+                    Add Task
+                  </button>
+                </form>
+              </div>
+              <div class="tasks-list-panel">
+                <div class="filter-bar">
+                  <button class="filter-btn active" data-filter="all">
+                    All
+                  </button>
+                  <button class="filter-btn" data-filter="important">
+                    Important
+                  </button>
+                </div>
+                <div id="allTasks" class="task-items-container"></div>
+              </div>
+            </div>
+          </section>
+
+          <section id="planner-page" class="page">
+            <div class="page-header">
+              <h2>Workflow Planner</h2>
+            </div>
+            <div class="planner-container card">
+              <div id="day-planner-list"></div>
+            </div>
+          </section>
+
+          <section id="focus-page" class="page">
+            <div class="page-header">
+              <h2>Focus Sessions</h2>
+            </div>
+            <div class="focus-container">
+              <div class="pomodoro-timer card">
+                <div class="timer-type" id="sessionBadge">Work Session</div>
+                <div class="timer-display" id="timerDisplay">25:00</div>
+                <div class="timer-controls">
+                  <button class="btn-secondary" id="resetBtn">
+                    <i class="ri-restart-line"></i>
+                  </button>
+                  <button class="btn-primary btn-large" id="startBtn">
+                    Start Focus
+                  </button>
+                  <button class="btn-secondary" id="pauseBtn">
+                    <i class="ri-pause-line"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="weather-page" class="page">
+            <div class="page-header">
+              <h2>Weather Updates</h2>
+            </div>
+            <div class="weather-search-bar">
+              <div class="search-input-wrapper">
+                <i class="ri-search-line"></i>
+                <input
+                  type="text"
+                  id="weather-search"
+                  placeholder="Search for a city..."
+                />
+              </div>
+            </div>
+
+            <div class="weather-layout">
+              <div class="weather-main card">
+                <div class="weather-main-info">
+                  <h2 id="weather-location">--</h2>
+                </div>
+                <div class="weather-main-temp">
+                  <span id="weather-main-icon" class="large-icon">--</span>
+                  <div>
+                    <h1 id="weather-temp">--°C</h1>
+                    <p id="weather-condition">--</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="weather-details grid">
+                <div class="detail-card card">
+                  <i class="ri-windy-line"></i>
+                  <div>
+                    <p class="label">Wind</p>
+                    <h3 id="weather-wind">-- km/h</h3>
+                  </div>
+                </div>
+                <div class="detail-card card">
+                  <i class="ri-drop-fill"></i>
+                  <div>
+                    <p class="label">Humidity</p>
+                    <h3 id="weather-humidity">--%</h3>
+                  </div>
+                </div>
+              </div>
+
+              <div class="forecast-container">
+                <div
+                  class="page-header"
+                  style="margin-bottom: 24px; margin-top: 16px"
+                >
+                  <h3>Next Days</h3>
+                </div>
+                <div class="forecast-grid" id="forecast-grid"></div>
+              </div>
+            </div>
+          </section>
+
+          <section id="goals-page" class="page">
+            <div class="page-header">
+              <h2>Goals & Achievements</h2>
+            </div>
+            <div class="goals-layout">
+              <div class="goal-input-card card">
+                <input
+                  type="text"
+                  id="goal-input"
+                  placeholder="What's your next big goal?"
+                />
+                <button class="btn-primary" id="add-goal-btn">Add Goal</button>
+              </div>
+              <ul class="goal-list" id="goal-list"></ul>
+            </div>
+          </section>
+
+          <section id="inspiration-page" class="page">
+            <div class="page-header">
+              <h2>Daily Inspiration</h2>
+            </div>
+            <div class="inspiration-wrapper">
+              <div class="quote-card-pro">
+                <div class="quote-bg-mark">
+                  <i class="ri-double-quotes-l"></i>
+                </div>
+                <div class="quote-text-content" id="quote-content-wrapper">
+                  <h2 id="full-quote-text">Loading inspiration...</h2>
+                  <div class="author-block">
+                    <div class="author-line"></div>
+                    <p id="full-quote-author"></p>
+                  </div>
+                </div>
+                <div class="quote-actions">
+                  <button class="btn-primary" id="refresh-quote">
+                    <i class="ri-refresh-line"></i> Generate New
+                  </button>
+                  <button
+                    class="btn-secondary"
+                    id="copy-quote"
+                    title="Copy Quote"
+                  >
+                    <i class="ri-clipboard-line"></i> Copy
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <footer class="app-footer">
+          <p>&copy; <span id="current-year"></span> Produtivity Dashboard. All rights reserved.</p>
+        </footer>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
