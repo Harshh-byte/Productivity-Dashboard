@@ -452,12 +452,12 @@ document.addEventListener("DOMContentLoaded", () => {
             );
           },
           () => {
-            const city = localStorage.getItem("dash_last_city") || "London";
+            const city = localStorage.getItem("dash_last_city") || "Tokyo, JP";
             this.updateWeather(city);
           },
         );
       } else {
-        const city = localStorage.getItem("dash_last_city") || "London";
+        const city = localStorage.getItem("dash_last_city") || "Tokyo, JP";
         this.updateWeather(city);
       }
     },
@@ -475,11 +475,12 @@ document.addEventListener("DOMContentLoaded", () => {
             `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10`,
           );
           const geoData = await geoRes.json();
-          locationName =
+          const city =
             geoData.address.city ||
             geoData.address.town ||
-            geoData.address.village ||
-            "Current Location";
+            geoData.address.village;
+          const countryCode = geoData.address.country_code ? geoData.address.country_code.toUpperCase() : "";
+          locationName = city ? (countryCode ? `${city}, ${countryCode}` : city) : "Current Location";
         } catch (e) {
           console.error("Reverse geocoding error:", e);
         }
@@ -564,7 +565,7 @@ document.addEventListener("DOMContentLoaded", () => {
       this.dom.miniWeatherTemp.textContent = `${Math.round(weather.current.temperature_2m)}°C`;
       this.dom.miniWeatherDesc.textContent = desc;
       this.dom.miniWeatherIcon.textContent = emoji;
-      this.dom.miniWeatherLoc.textContent = locationName.split(",")[0];
+      this.dom.miniWeatherLoc.textContent = locationName;
 
       this.dom.forecastGrid.innerHTML = "";
       for (let i = 1; i < 6; i++) {
